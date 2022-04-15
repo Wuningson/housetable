@@ -15,12 +15,13 @@ const paidBy: AppointmentPaidBy[] = ['USD', 'EUR', 'BTC', 'UNPAID'];
 export const generateAppointment = (
   patientId: string,
   startTime: string,
-  endTime: string
+  endTime: string,
+  feePaidBy?: AppointmentPaidBy
 ): Appointment => ({
   patient: patientId,
   startTime: new Date(startTime),
   endTime: new Date(endTime),
   description: 'test description',
-  feePaidBy: paidBy[random(4)],
+  feePaidBy: feePaidBy || paidBy[random(4)],
   amount: random(56)
 });

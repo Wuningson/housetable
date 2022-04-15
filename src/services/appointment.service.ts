@@ -16,15 +16,6 @@ export async function addAppointment(body: Appointment) {
   return appointment;
 }
 
-export async function fetchAppointmentById(id: string) {
-  const appointment = appointmentModel.findById(id);
-  if (!appointment) {
-    throw new CustomError('BAD_REQUEST', 'invalid appointment id');
-  }
-
-  return appointment;
-}
-
 export async function fetchPatientsAppointments(patientId: string) {
   return await appointmentModel.find({ patient: patientId });
 }
@@ -136,10 +127,10 @@ export async function generateReports(period: ReportPeriod, type: ReportType) {
   ];
 
   const result = await appointmentModel.aggregate(aggregation);
-  if (result[0].finalTotal >= 0) {
+  if (result[0]?.finalTotal >= 0) {
     return result[0].finalTotal;
   }
-  throw new CustomError('BAD_REQUEST', 'could not get reports');
+  new CustomError('BAD_REQUEST', 'could not get reports');
 }
 
 export async function getPopularPet() {

@@ -83,7 +83,7 @@ describe('Patient Service', () => {
     it('should return the patient data if the id is valid', async () => {
       const patient = await patientModel.create(generatePatient());
       const resp = await fetchPatientById(patient._id);
-      expect(resp.toObject()).toStrictEqual(patient.toObject());
+      expect(resp?.toObject()).toStrictEqual(patient.toObject());
     });
 
     it('should throw invalid patient id if the data does not exist', async () => {

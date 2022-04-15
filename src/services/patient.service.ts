@@ -27,7 +27,7 @@ export async function updatePatientById(id: string, body: Partial<Patient>) {
 export async function fetchPatientById(id: string) {
   const patient = await patientModel.findById(id);
   if (!patient) {
-    throw new CustomError('BAD_REQUEST', 'invalid patient id');
+    new CustomError('BAD_REQUEST', 'invalid patient id');
   }
 
   return patient;
